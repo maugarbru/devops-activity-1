@@ -1,10 +1,5 @@
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  MaxLength,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { F1Team } from 'src/f1-teams/f1-teams.entity';
 
 export class CreateF1DriverDto {
   @IsString()
@@ -17,7 +12,6 @@ export class CreateF1DriverDto {
 
   @IsNumber()
   @IsNotEmpty()
-  @MaxLength(3)
   carNumber: number;
 
   @IsNumber()
@@ -34,16 +28,14 @@ export class CreateF1DriverDto {
 
   @IsNumber()
   @IsNotEmpty()
-  @MaxLength(3)
   age: number;
 
   @IsNumber()
   @IsNotEmpty()
-  @MaxLength(3)
-  experienceYears: number;
+  debutYear: number;
 
-  @IsString()
-  team: string;
+  @IsNotEmpty()
+  team?: F1Team;
 }
 
 export class UpdateF1DriverDto {
@@ -59,7 +51,6 @@ export class UpdateF1DriverDto {
 
   @IsNumber()
   @IsNotEmpty()
-  @MaxLength(3)
   @IsOptional()
   carNumber?: number;
 
@@ -80,17 +71,15 @@ export class UpdateF1DriverDto {
 
   @IsNumber()
   @IsNotEmpty()
-  @MaxLength(3)
   @IsOptional()
   age?: number;
 
   @IsNumber()
   @IsNotEmpty()
-  @MaxLength(3)
   @IsOptional()
-  experienceYears?: number;
+  debutYear?: number;
 
   @IsString()
   @IsOptional()
-  team?: string;
+  team?: F1Team;
 }

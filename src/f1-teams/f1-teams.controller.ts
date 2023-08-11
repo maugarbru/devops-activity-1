@@ -1,3 +1,4 @@
+// @packages
 import {
   Body,
   Controller,
@@ -7,35 +8,40 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { F1TeamsService } from './f1-teams.service';
+
+// @scripts
 import { CreateF1TeamDto, UpdateF1TeamDto } from './dto';
+import { F1TeamsService } from './f1-teams.service';
 
 @Controller('f1-teams')
 export class F1TeamsController {
   constructor(private f1TeamsService: F1TeamsService) {}
 
   @Get()
-  getAllTeams() {
-    return this.f1TeamsService.getAllTeams();
+  async getAllTeams() {
+    return await this.f1TeamsService.getAllTeams();
   }
 
   @Get(':id')
-  getOneDriver(@Param('id') id: string) {
-    return this.f1TeamsService.getOneTeam(id);
+  async getOneDriver(@Param('id') id: string) {
+    return await this.f1TeamsService.getOneTeam(id);
   }
 
   @Post()
-  createOneDriver(@Body() newTeam: CreateF1TeamDto) {
-    return this.f1TeamsService.createOneTeam(newTeam);
+  async createOneDriver(@Body() newTeam: CreateF1TeamDto) {
+    return await this.f1TeamsService.createOneTeam(newTeam);
   }
 
   @Patch(':id')
-  updateOneDriver(@Param('id') id: string, @Body() teamData: UpdateF1TeamDto) {
-    return this.f1TeamsService.updateOneTeam(id, teamData);
+  async updateOneDriver(
+    @Param('id') id: string,
+    @Body() teamData: UpdateF1TeamDto,
+  ) {
+    return await this.f1TeamsService.updateOneTeam(id, teamData);
   }
 
   @Delete(':id')
-  deleteOneDriver(@Param('id') id: string) {
-    return this.f1TeamsService.deleteOneTeam(id);
+  async deleteOneDriver(@Param('id') id: string) {
+    return await this.f1TeamsService.deleteOneTeam(id);
   }
 }

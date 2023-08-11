@@ -4,14 +4,14 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-  Length,
   MaxLength,
 } from 'class-validator';
+import { F1Driver } from 'src/f1-drivers/f1-drivers.entity';
 
 export class CreateF1TeamDto {
   @IsString()
   @IsNotEmpty()
-  fullname: string;
+  fullName: string;
 
   @IsNumber()
   @IsNotEmpty()
@@ -27,8 +27,7 @@ export class CreateF1TeamDto {
 
   @IsNumber()
   @IsNotEmpty()
-  @Length(4)
-  fundationYear: number;
+  debutYear: number;
 
   @IsString()
   @IsNotEmpty()
@@ -37,7 +36,8 @@ export class CreateF1TeamDto {
 
   @IsArray()
   @IsNotEmpty()
-  pilots: string[];
+  @IsOptional()
+  drivers?: F1Driver[];
 }
 
 export class UpdateF1TeamDto {
@@ -63,9 +63,8 @@ export class UpdateF1TeamDto {
 
   @IsNumber()
   @IsNotEmpty()
-  @Length(4)
   @IsOptional()
-  fundationYear?: number;
+  debutYear?: number;
 
   @IsString()
   @IsNotEmpty()
@@ -76,5 +75,5 @@ export class UpdateF1TeamDto {
   @IsArray()
   @IsNotEmpty()
   @IsOptional()
-  pilots: string[];
+  drivers: F1Driver[];
 }

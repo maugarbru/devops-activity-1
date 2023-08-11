@@ -1,21 +1,41 @@
+// @packages
+import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
+
+// @scripts
 import { CreateF1TeamDto, UpdateF1TeamDto } from './dto';
+import { F1Team } from './f1-teams.entity';
 
 @Injectable()
 export class F1TeamsService {
-  getAllTeams() {
-    // TODO: Create DB connection
+  constructor(
+    @InjectRepository(F1Team)
+    private readonly teamRepository: Repository<F1Team>,
+  ) {}
+
+  async getAllTeams() {
+    return await this.teamRepository.find({
+      relations: {
+        drivers: true,
+      },
+    });
   }
-  getOneTeam(id: string) {
-    // TODO: Create DB connection
+  async getOneTeam(id: string) {
+    return await this.teamRepository.findOne({
+      where: { id },
+      relations: {
+        drivers: true,
+      },
+    });
   }
-  createOneTeam(data: CreateF1TeamDto) {
-    // TODO: Create DB connection
+  async createOneTeam(data: CreateF1TeamDto) {
+    return await this.teamRepository.save(data);
   }
-  updateOneTeam(id: string, data: UpdateF1TeamDto) {
-    // TODO: Create DB connection
+  async updateOneTeam(id: string, data: UpdateF1TeamDto) {
+    return await this.teamRepository.update({ id }, data);
   }
-  deleteOneTeam(id: string) {
-    // TODO: Create DB connection
+  async deleteOneTeam(id: string) {
+    return await this.teamRepository.delete({ id });
   }
 }

@@ -1,3 +1,4 @@
+// @packages
 import {
   Body,
   Controller,
@@ -7,38 +8,40 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { F1DriversService } from './f1-drivers.service';
+
+// @scripts
 import { CreateF1DriverDto, UpdateF1DriverDto } from './dto';
+import { F1DriversService } from './f1-drivers.service';
 
 @Controller('f1-drivers')
 export class F1DriversController {
   constructor(private f1DriversService: F1DriversService) {}
 
   @Get()
-  getAllDrivers() {
-    return this.f1DriversService.getAllDrivers();
+  async getAllDrivers() {
+    return await this.f1DriversService.getAllDrivers();
   }
 
   @Get(':id')
-  getOneDriver() {
-    return this.f1DriversService.getOneDriver('');
+  async getOneDriver() {
+    return await this.f1DriversService.getOneDriver('');
   }
 
   @Post()
-  createOneDriver(@Body() newDriver: CreateF1DriverDto) {
-    return this.f1DriversService.createOneDriver(newDriver);
+  async createOneDriver(@Body() newDriver: CreateF1DriverDto) {
+    return await this.f1DriversService.createOneDriver(newDriver);
   }
 
   @Patch(':id')
-  updateOneDriver(
+  async updateOneDriver(
     @Param('id') id: string,
     @Body() driverData: UpdateF1DriverDto,
   ) {
-    return this.f1DriversService.updateOneDriver(id, driverData);
+    return await this.f1DriversService.updateOneDriver(id, driverData);
   }
 
   @Delete(':id')
-  deleteOneDriver(@Param('id') id: string) {
-    return this.f1DriversService.deleteOneDriver(id);
+  async deleteOneDriver(@Param('id') id: string) {
+    return await this.f1DriversService.deleteOneDriver(id);
   }
 }
