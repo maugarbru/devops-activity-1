@@ -1,0 +1,41 @@
+name: CI Frontend
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  build:
+    name: 'API CI Test'
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+      PORT: ${{ vars.PORT }}
+      NODE_ENV: ${{vars.NODE_ENV}}
+    environment: dev
+
+    steps:
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Run linters
+        run: |
+          yarn lint
+          yarn prettier
+
+      - name: Run Unit Tests
+        run: yarn test
+
+      - name: Run Build
+        run: yarn run build
