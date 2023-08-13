@@ -22,12 +22,14 @@ export class F1TeamsService {
     });
   }
   async getOneTeam(id: string) {
-    return await this.teamRepository.findOne({
-      where: { id },
-      relations: {
-        drivers: true,
-      },
-    });
+    return (
+      (await this.teamRepository.findOne({
+        where: { id },
+        relations: {
+          drivers: true,
+        },
+      })) ?? null
+    );
   }
   async createOneTeam(data: CreateF1TeamDto) {
     return await this.teamRepository.save(data);
