@@ -1,15 +1,23 @@
-FROM node:18-alpine
-
+# Installing dependencies:
+FROM node:18-alpine AS install-dependencies
 WORKDIR /app
-COPY package.json ./
-COPY yarn.lock ./
-
+COPY package.json yarn.lock ./
 RUN yarn install
-
 COPY . .
-
+ 
+ 
+# Creating a build:
+FROM node:18-alpine AS create-build
+WORKDIR /app
+COPY --from=install-dependencies /app ./
 RUN yarn build
-
-VOLUME /app/src/core/db/
-
-CMD [ "node", "dist/main.js" ]
+USER node
+ 
+ 
+# Running the application:
+FROM node:18-alpine AS run
+WORKDIR /app
+COPY --from=install-dependencies /app/node_modules ./node_modules
+COPY --from=create-build /app/dist ./dist
+COPY package.json ./
+CMD ["npm", "run", "start:prod"]

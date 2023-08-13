@@ -13,7 +13,7 @@ class ConfigService {
     return {
       type: 'sqlite',
 
-      database: 'src/core/db/' + this.DATABASE_NAME,
+      database: '/db/' + this.DATABASE_NAME,
       entities: [F1Driver, F1Team],
       synchronize: this.NODE_ENV !== 'production',
     };

@@ -39,4 +39,4 @@ lerna-debug.log*
 .env
 
 # DB
-/src/core/db
+/db
