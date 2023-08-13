@@ -21,20 +21,21 @@ jobs:
     environment: dev
 
     steps:
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+          
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ steps.extract_branch.outputs.branch }}
 
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          cache: 'yarn'
-
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --immutable --immutable-cache --check-cache
 
-      - name: Run linters
+      - name: Check Code-Styling
         run: |
           yarn run lint
           yarn run prettier
