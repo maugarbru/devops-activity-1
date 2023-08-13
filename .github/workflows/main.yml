@@ -35,16 +35,13 @@ jobs:
       - name: Install Dependencies
         run: yarn install --immutable --immutable-cache --check-cache
 
-      - name: Install Yarn
-        run: npm install -g yarn
-
       - name: Check Code-Styling
         run: |
-          yarn run lint
-          yarn run prettier
+          yarn lint
+          yarn prettier
 
       - name: Run Unit Tests
-        run: yarn run test
+        run: yarn test
 
       - name: Run Build
-        run: yarn run build
+        run: yarn build
