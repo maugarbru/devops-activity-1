@@ -1,0 +1,12 @@
+version: "3"
+services:
+  nest-api-prod:
+    build:
+      context: .
+      target: run
+    volumes:
+      - ./db:/app/db
+    env_file:
+      - .env.production
+    ports:
+      - "3000:3000"

@@ -20,4 +20,5 @@ WORKDIR /app
 COPY --from=install-dependencies /app/node_modules ./node_modules
 COPY --from=create-build /app/dist ./dist
 COPY package.json ./
-CMD ["npm", "run", "start:prod"]
+CMD ["yarn", "start:prod"]
+EXPOSE 3000
