@@ -72,7 +72,7 @@ describe('F1Teams', () => {
     it('should return null when the f1-team is not found', async () => {
       jest.spyOn(service, 'getOneTeam').mockImplementation(async () => null);
 
-      expect(await service.getOneTeam('test')).toBe({});
+      expect(await service.getOneTeam('test')).toBe(null);
     });
   });
 });
