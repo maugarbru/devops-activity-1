@@ -1,4 +1,4 @@
-name: CI Frontend
+name: Main CI Workflow
 
 on:
   workflow_dispatch:
