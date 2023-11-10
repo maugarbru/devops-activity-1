@@ -18,19 +18,9 @@ export class SeedService {
   ) {}
 
   async seedData() {
-    return Promise.all(
-      teamsSeed.map(async (t, i) => {
-        const team = new F1Team();
-        for (const key of Object.keys(t)) {
-          team[key] = t[key];
-        }
-        await this.teamRepository.save(team);
-        return Promise.all(
-          driversSeed[i].map((driver) =>
-            this.driverRepository.save({ ...driver, team }),
-          ),
-        );
-      }),
-    );
+    return Promise.all([
+      teamsSeed.map((team) => this.teamRepository.save(team)),
+      driversSeed.map((driver) => this.driverRepository.save(driver)),
+    ]);
   }
 }
