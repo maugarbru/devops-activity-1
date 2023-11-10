@@ -24,14 +24,5 @@ export const testDrivers: F1Driver[] = [
     podiums: 27,
     age: 25,
     debutYear: 2018,
-    team: {
-      id: 'ferrari',
-      fullName: 'Scuderia Ferrari',
-      victories: 243,
-      championships: 16,
-      podiums: 773,
-      debutYear: 1950,
-      brandColor: '#FF2800',
-    },
   },
 ];
