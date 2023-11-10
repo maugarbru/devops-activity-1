@@ -23,17 +23,17 @@ export class F1TeamsController {
   }
 
   @Get(':id')
-  async getOneDriver(@Param('id') id: string) {
+  async getOneTeam(@Param('id') id: string) {
     return await this.f1TeamsService.getOneTeam(id);
   }
 
   @Post()
-  async createOneDriver(@Body() newTeam: CreateF1TeamDto) {
+  async createOneTeam(@Body() newTeam: CreateF1TeamDto) {
     return await this.f1TeamsService.createOneTeam(newTeam);
   }
 
   @Patch(':id')
-  async updateOneDriver(
+  async updateOneTeam(
     @Param('id') id: string,
     @Body() teamData: UpdateF1TeamDto,
   ) {
@@ -41,7 +41,7 @@ export class F1TeamsController {
   }
 
   @Delete(':id')
-  async deleteOneDriver(@Param('id') id: string) {
+  async deleteOneTeam(@Param('id') id: string) {
     return await this.f1TeamsService.deleteOneTeam(id);
   }
 }

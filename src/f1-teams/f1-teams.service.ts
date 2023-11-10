@@ -15,19 +15,12 @@ export class F1TeamsService {
   ) {}
 
   async getAllTeams() {
-    return await this.teamRepository.find({
-      relations: {
-        drivers: true,
-      },
-    });
+    return await this.teamRepository.find();
   }
   async getOneTeam(id: string) {
     return (
       (await this.teamRepository.findOne({
         where: { id },
-        relations: {
-          drivers: true,
-        },
       })) ?? null
     );
   }

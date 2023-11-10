@@ -1,12 +1,10 @@
 import {
-  IsArray,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
   MaxLength,
 } from 'class-validator';
-import { F1Driver } from 'src/f1-drivers/f1-drivers.entity';
 
 export class CreateF1TeamDto {
   @IsString()
@@ -33,11 +31,6 @@ export class CreateF1TeamDto {
   @IsNotEmpty()
   @MaxLength(7)
   brandColor: string;
-
-  @IsArray()
-  @IsNotEmpty()
-  @IsOptional()
-  drivers?: F1Driver[];
 }
 
 export class UpdateF1TeamDto {
@@ -71,9 +64,4 @@ export class UpdateF1TeamDto {
   @MaxLength(7)
   @IsOptional()
   brandColor?: string;
-
-  @IsArray()
-  @IsNotEmpty()
-  @IsOptional()
-  drivers: F1Driver[];
 }

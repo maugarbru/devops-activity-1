@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
-import { F1Team } from 'src/f1-teams/f1-teams.entity';
 
 export class CreateF1DriverDto {
   @IsString()
@@ -33,9 +32,6 @@ export class CreateF1DriverDto {
   @IsNumber()
   @IsNotEmpty()
   debutYear: number;
-
-  @IsNotEmpty()
-  team?: F1Team;
 }
 
 export class UpdateF1DriverDto {
@@ -78,8 +74,4 @@ export class UpdateF1DriverDto {
   @IsNotEmpty()
   @IsOptional()
   debutYear?: number;
-
-  @IsString()
-  @IsOptional()
-  team?: F1Team;
 }

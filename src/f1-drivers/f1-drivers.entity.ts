@@ -1,11 +1,8 @@
 import {
   Column,
   Entity,
-  ManyToOne,
   PrimaryGeneratedColumn,
-  JoinColumn,
 } from 'typeorm';
-import { F1Team } from 'src/f1-teams/f1-teams.entity';
 
 @Entity()
 export class F1Driver {
@@ -35,8 +32,4 @@ export class F1Driver {
 
   @Column('int')
   debutYear: number;
-
-  @ManyToOne(() => F1Team, (team) => team.drivers)
-  @JoinColumn()
-  team: F1Team;
 }

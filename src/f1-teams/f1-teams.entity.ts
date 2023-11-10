@@ -2,10 +2,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
-  JoinColumn,
 } from 'typeorm';
-import { F1Driver } from 'src/f1-drivers/f1-drivers.entity';
 
 @Entity()
 export class F1Team {
@@ -29,8 +26,4 @@ export class F1Team {
 
   @Column('varchar')
   brandColor: string;
-
-  @OneToMany(() => F1Driver, (driver) => driver.team)
-  @JoinColumn()
-  drivers?: F1Driver[];
 }

@@ -15,19 +15,12 @@ export class F1DriversService {
   ) {}
 
   async getAllDrivers(): Promise<F1Driver[]> {
-    return await this.driverRepository.find({
-      relations: {
-        team: true,
-      },
-    });
+    return await this.driverRepository.find();
   }
   async getOneDriver(id: string): Promise<F1Driver> {
     return (
       (await this.driverRepository.findOne({
         where: { id },
-        relations: {
-          team: true,
-        },
       })) ?? null
     );
   }
