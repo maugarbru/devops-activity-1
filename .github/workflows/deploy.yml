@@ -1,0 +1,34 @@
+name: Continuous Delivering
+
+on:
+    workflow_run:
+        workflows: ["Infrastructure"]
+        branches: [main]
+        types: 
+            - completed
+
+
+jobs:
+  build-app:
+    name: 'CD'
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ steps.extract_branch.outputs.branch }}
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSL_HOST }}
+          username: ${{ secrets.SSL_USERNAME }}
+          password: ${{ secrets.SSL_PASSWORD }}
+          port: ${{ secrets.SSL_PORT }}
+          script: |
+            sudo docker stop nest-api-devops
+            sudo docker rm nest-api-devops
+            sudo docker pull maugarbru/nest-api-devops
+            sudo docker run -d --restart unless-stopped -p 4000:3000 --name nest-api-devops maugarbru/nest-api-devops
