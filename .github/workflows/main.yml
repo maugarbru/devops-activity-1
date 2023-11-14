@@ -1,17 +1,15 @@
-name: Main CI/CD Workflow
+name: Main CI
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
   pull_request:
-    types: [opened, edited, synchronize, reopened]
     branches:
       - main
 
 jobs:
-  build:
+  build-app:
     name: 'CI/CD'
     runs-on: ubuntu-latest
     env:
@@ -31,9 +29,6 @@ jobs:
         with:
           node-version: 18
           cache: 'yarn'
-        
-      - name: Install serverless globally
-        run: npm install -g serverless
 
       - name: Install Dependencies
         run: yarn install --immutable --immutable-cache --check-cache
@@ -48,9 +43,3 @@ jobs:
 
       - name: Run Build
         run: yarn build
-
-      # - name: Deploy lambda function
-      #   run: sls deploy
-      #   env:
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
