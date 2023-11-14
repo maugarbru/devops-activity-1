@@ -19,6 +19,7 @@ provider "azurerm" {
 
 terraform {
   backend "azurerm" {
+    use_oidc             = true
     resource_group_name  = "rg-azure-tf"
     storage_account_name = "lastdevopstf"
     container_name       = "terraform-state"
