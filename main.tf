@@ -87,7 +87,7 @@ resource "azurerm_linux_virtual_machine" "last_devops-vm" {
 
   admin_password                  = "j85dEzfXNCxVyB"
   disable_password_authentication = false
-  
+
   custom_data = filebase64("customdata.tpl")
 
   os_disk {
