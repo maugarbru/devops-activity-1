@@ -43,3 +43,22 @@ jobs:
 
       - name: Run Build
         run: yarn build
+
+      - name: Build Docker Image
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username maugarbru --password-stdin
+          docker build -t maugarbru/nest-api-devops .
+          docker push maugarbru/nest-api-devops
+
+      # - name: Deploy
+      #   uses: appleboy/ssh-action@v1.0.0
+      #   with:
+      #     host: ${{ secrets.SSL_HOST }}
+      #     username: ${{ secrets.SSL_USERNAME }}
+      #     password: ${{ secrets.SSL_PASSWORD }}
+      #     port: ${{ secrets.SSL_PORT }}
+      #     script: |
+      #       sudo docker stop ${{ vars.DOCKER_IMAGE_NAME }}
+      #       sudo docker rm ${{ vars.DOCKER_IMAGE_NAME }}
+      #       sudo docker pull ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }}
+      #       sudo docker run -d --restart unless-stopped -p 4000:3000 --name ${{ vars.DOCKER_IMAGE_NAME }} ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }}

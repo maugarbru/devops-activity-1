@@ -17,6 +17,17 @@ provider "azurerm" {
   features {}
 }
 
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "rg-azure-tf"
+    storage_account_name = "lastdevopstf"
+    container_name       = "terraform-state"
+    key                  = "terraform.tfstate"
+  }
+}
+
+
+
 # Grupo de recursos para que todo quede relacionado a este
 resource "azurerm_resource_group" "last_devops-rg" {
   name     = "last_devops_group"
