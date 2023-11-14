@@ -1,8 +1,8 @@
-name: 'Terraform Plan/Apply'
+name: Infrastructure
 
 on:
     workflow_run:
-        workflows: ["Main CI"]
+        workflows: ["Continuous Integration"]
         branches: [main]
         types: 
             - completed
@@ -21,7 +21,7 @@ env:
 
 jobs:
   terraform:
-    name: 'Terraform Plan'
+    name: 'Terraform'
     runs-on: ubuntu-latest
     env:
       #this is needed since we are running terraform with read-only permissions

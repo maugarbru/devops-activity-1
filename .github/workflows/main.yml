@@ -1,4 +1,4 @@
-name: Main CI
+name: Continuous Integration
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-app:
-    name: 'CI/CD'
+    name: 'CI'
     runs-on: ubuntu-latest
     env:
       DATABASE_NAME: ${{ vars.DATABASE_NAME }}
