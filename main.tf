@@ -5,13 +5,14 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=3.0.0"
+      version = "=3.7.0"
     }
   }
 }
 
 # Configurar el Microsoft Azure Provider
 provider "azurerm" {
+  use_oidc                   = true
   skip_provider_registration = true
   features {}
 }
