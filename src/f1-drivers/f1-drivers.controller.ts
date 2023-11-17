@@ -23,8 +23,8 @@ export class F1DriversController {
   }
 
   @Get(':id')
-  async getOneDriver() {
-    return await this.f1DriversService.getOneDriver('');
+  async getOneDriver(@Param('id') id: string) {
+    return await this.f1DriversService.getOneDriver(id);
   }
 
   @Post()
