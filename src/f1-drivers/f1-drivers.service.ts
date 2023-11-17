@@ -18,11 +18,9 @@ export class F1DriversService {
     return await this.driverRepository.find();
   }
   async getOneDriver(id: string): Promise<F1Driver> {
-    return (
-      (await this.driverRepository.findOne({
-        where: { id },
-      })) ?? null
-    );
+    return await this.driverRepository.findOne({
+      where: { id },
+    });
   }
   async createOneDriver(data: CreateF1DriverDto) {
     return await this.driverRepository.save(data);
